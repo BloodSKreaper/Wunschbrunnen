@@ -1,0 +1,8 @@
+name: Wunschbrunnen
+main: me.chrisochs.wunschbrunnen.Main
+version: pre-Release_0.1
+
+commands:
+  setwell:
+    description: Commands to report players
+    usage: /<command> <radius>
