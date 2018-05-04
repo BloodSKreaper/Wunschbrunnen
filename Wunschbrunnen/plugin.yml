@@ -4,5 +4,5 @@ version: pre-Release_0.1
 
 commands:
   setwell:
-    description: Commands to report players
-    usage: /<command> <radius>
+    description: Setzt einen Brunnen
+    usage: /<command> <name> [radius]

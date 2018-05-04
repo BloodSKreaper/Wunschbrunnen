@@ -1,5 +1,6 @@
 package me.chrisochs.wunschbrunnen.commands;
 
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -8,46 +9,67 @@ import org.bukkit.entity.Player;
 import me.chrisochs.wunschbrunnen.Main;
 import me.chrisochs.wunschbrunnen.Wunschbrunnen;
 
-public class SetWellCommand implements CommandExecutor{
+public class SetWellCommand implements CommandExecutor {
+
+	/*
+	 * Handelt den Plugin-Befehl "/setwell" ab. Dieser Befehl wird wie folgt
+	 * aufgebaut: "/setwell <Name> [Radius]" Gibt der Spieler nur einen Namen und
+	 * keinen Radius ein, so wird der Radius standardm‰ﬂig auf 2 gesetzt.
+	 */
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String arg2, String[] args) {
-		if(sender instanceof Player) {
+		if (sender instanceof Player) {
 			Player p = (Player) sender;
-			if(args.length <1 || args.length >1) {
-				p.sendMessage("ßcFalsches Format! Bitte benutze ßb/setwell <radius>");
-			}else {
-				if(!isInteger(args[0])) {
-					p.sendMessage("ßcFehlerhafte Radius-Eingabe! Es sind nur Ganzzahlen erlaubt!");
-				}else {
-					int x,y,z,radius;
-					x=p.getLocation().getBlockX();
-					y=p.getLocation().getBlockY();
-					z=p.getLocation().getBlockZ();
-					radius = Integer.parseInt(args[0]);
-					Main.bm.addBrunnen(new Wunschbrunnen(x,y,z,radius));
+			// Wenn es ein Argument nach dem Befehl gibt (Name)
+			int x, y, z, radius;
+			String name;
+			if (args.length >= 1 && args.length < 3) {
+				World world = p.getLocation().getWorld();
+				x = p.getLocation().getBlockX();
+				y = p.getLocation().getBlockY();
+				z = p.getLocation().getBlockZ();
+				name = args[0];
+				if (args.length == 2) {
+					if (!isInteger(args[1])) {
+						p.sendMessage("ßcFehlerhafte Radius-Eingabe! Es sind nur Ganzzahlen erlaubt!");
+						return false;
+					} else {
+						radius = Integer.parseInt(args[1]);
+					}
+				} else {
+					radius = 2;
 				}
+				if(Main.bm.containsBrunnen(name)) {
+					p.sendMessage("ßcEin Brunnen mit dem Namen "+name+" existiert bereits! Suche dir einen andere Namen aus oder entferne den Brunnen mit /removeWell <NAME>");
+					p.sendMessage("ßaAlle Brunnen:");
+					Main.bm.printAllWells(p);
+				}else {
+					p.sendMessage("ßaDer Brunnen ß6"+name+" ßawurde erfolgreich erstellt. (X="+x+";Y="+y+";Z="+z+";r="+radius+")");
+				Main.bm.addBrunnen(new Wunschbrunnen(name, world, x, y, z, radius));
+				}
+			} else {
+
+				p.sendMessage("ßcFalsches Format! Bitte benutze ßb/setwell <name> [radius]");
 			}
+
 		}
 		return true;
 	}
-	
-	   public static boolean isInteger(String s) {
-		      boolean isValidInteger = false;
-		      try
-		      {
-		         Integer.parseInt(s);
-		 
-		         // s is a valid integer
-		 
-		         isValidInteger = true;
-		      }
-		      catch (NumberFormatException ex)
-		      {
-		         // s is not an integer
-		      }
-		 
-		      return isValidInteger;
-		   }
+
+	public static boolean isInteger(String s) {
+		boolean isValidInteger = false;
+		try {
+			Integer.parseInt(s);
+
+			// s is a valid integer
+
+			isValidInteger = true;
+		} catch (NumberFormatException ex) {
+			// s is not an integer
+		}
+
+		return isValidInteger;
+	}
 
 }

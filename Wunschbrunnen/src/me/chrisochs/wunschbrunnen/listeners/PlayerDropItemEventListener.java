@@ -12,6 +12,7 @@ public class PlayerDropItemEventListener implements Listener{
 	@EventHandler
 	public void onPlayerDropItemEvent(PlayerDropItemEvent e) {
 		if(e.getItemDrop().getItemStack().getType() == Material.GOLD_NUGGET&&e.getItemDrop().getItemStack().getAmount() == 1) {
+			e.getItemDrop().setInvulnerable(true);
 			Main.dm.addItem(e.getPlayer(), e.getItemDrop());
 		}
 	}
