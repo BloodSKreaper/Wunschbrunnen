@@ -55,7 +55,7 @@ public class BelohnungsManager {
 
 			}
 		} else {
-			p.sendMessage("§cHier gibts keine Eier!");
+			p.sendMessage("§cDu hattest leider kein Glück :(");
 
 		}
 	}

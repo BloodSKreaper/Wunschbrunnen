@@ -14,7 +14,7 @@ public class SetWellCommand implements CommandExecutor {
 	/*
 	 * Handelt den Plugin-Befehl "/setwell" ab. Dieser Befehl wird wie folgt
 	 * aufgebaut: "/setwell <Name> [Radius]" Gibt der Spieler nur einen Namen und
-	 * keinen Radius ein, so wird der Radius standardmäßig auf 2 gesetzt.
+	 * keinen Radius ein, so wird der Radius standardmäßig auf 1 gesetzt.
 	 */
 
 	@Override
@@ -38,7 +38,7 @@ public class SetWellCommand implements CommandExecutor {
 						radius = Integer.parseInt(args[1]);
 					}
 				} else {
-					radius = 2;
+					radius = 1;
 				}
 				if(Main.bm.containsBrunnen(name)) {
 					p.sendMessage("§cEin Brunnen mit dem Namen "+name+" existiert bereits! Suche dir einen andere Namen aus oder entferne den Brunnen mit /removeWell <NAME>");
