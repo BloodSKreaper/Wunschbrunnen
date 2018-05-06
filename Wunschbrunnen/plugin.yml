@@ -6,3 +6,6 @@ commands:
   setwell:
     description: Setzt einen Brunnen
     usage: /<command> <name> [radius]
+  removeWell:
+    description: Entfernt einen Brunnen
+    usage: /<command> <name>
