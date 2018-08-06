@@ -1,0 +1,11 @@
+name: Wunschbrunnen
+main: me.chrisochs.wunschbrunnen.Main
+version: pre-Release_0.1
+
+commands:
+  setwell:
+    description: Setzt einen Brunnen
+    usage: /<command> <name> [radius]
+  removeWell:
+    description: Entfernt einen Brunnen
+    usage: /<command> <name>

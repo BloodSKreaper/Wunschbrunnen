@@ -1,6 +1,0 @@
-name: CookieClicker
-main: me.chrisochs.cookieclicker.Main
-version: 1.0
-
-dependencies: [CF-PlayerdataAPI, Vault]
-commands:
